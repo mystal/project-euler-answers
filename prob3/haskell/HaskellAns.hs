@@ -9,9 +9,9 @@ main = do
 primeFactors :: Int -> [Int]
 primeFactors n = let candidates = primeCandidates n in
     case find  (\x -> 0 == (mod n x)) candidates of
-        Just x -> (primeFactors x) ++ (primeFactors (div n x)) --Found a factor, recurse
+        Just x -> x : (primeFactors (div n x)) --Found a prime factor, recurse
         Nothing -> [n] --No factors found, this is a prime number
 
 primeCandidates :: Int -> [Int]
 primeCandidates n = let top = (floor . (\x -> x / 2) . fromIntegral) n in
-    [top, top - 1 .. 2]
+    [2 .. top]
